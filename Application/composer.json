@@ -1,0 +1,6 @@
+{
+    "require": {
+        "vich/uploader-bundle": "^1.16",
+        "fzaninotto/faker": "^1.9"
+    }
+}
