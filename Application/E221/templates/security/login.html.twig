@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+{% block stylesheets %} 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{asset("css/login.css")}}">
+{% endblock %}
+{% block body %}
+
+{# <form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Please Se connecter</h1>
+    <label for="inputEmail">Email</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+    <label for="inputPassword">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" required>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    > #}
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+
+    {# <button class="btn btn-lg btn-primary" type="submit">
+        Se connecter
+    </button>
+</form> #}
+
+{# <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs"> #}
+      <div class="container my-5">
+        {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="mb-3 text-center">
+                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+        
+        <div id="logreg-forms">
+        <form method="post" class="form-signin" action="{{path('app_login')}}">
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Se connecter</h1>
+            <div class="social-login">
+                <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Connecter via Facebook</span> </button>
+                <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Connecter via Google+</span> </button>
+            </div>
+            <br/>
+            {# <p style="text-align:center"> OR  </p> #}
+            <input type="email" id="inputEmail" value="{{ last_username }}" class="form-control" placeholder="Adresse Email" required="" autofocus="">
+            <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required="">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
+            {#
+                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                See https://symfony.com/doc/current/security/remember_me.html
+
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Remember me
+                    </label>
+                </div>
+            #}
+
+            <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Se connecter</button>
+            <a href="#" id="forgot_pswd">Mot de passe oublié?</a>
+            <hr>
+            <!-- <p>Don't have an account!</p>  -->
+            <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Créer un compte</button>
+            </form>
+
+            <form method="post" action="/reset/password/" class="form-reset">
+                <input type="email" id="resetEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+                <button class="btn btn-primary btn-block" type="submit">Reset Password</button>
+                <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
+            </form>
+            
+            <form method="post" action="#" class="form-signup">
+                <div class="social-login">
+                    <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> S'inscrire via Facebook</span> </button>
+                </div>
+                <div class="social-login">
+                    <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> S'inscrire via Google+</span> </button>
+                </div>
+                <br/>
+                {# <p style="text-align:center">OR</p> #}
+
+                <input type="text" id="user-name" class="form-control" placeholder="Prénom et nom" required="" autofocus="">
+                <input type="email" id="user-email" class="form-control" placeholder="Email" required autofocus="">
+                <input type="password" id="user-pass" class="form-control" placeholder="Mot de passe" required autofocus="">
+                {# <input type="password" id="user-repeatpass" class="form-control" placeholder="Répéter le mot de passe" required autofocus=""> #}
+                <input type="file" id="user-pass" class="form-control" placeholder="Avatar" required autofocus="">
+
+                <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Enregistrer </button>
+                <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
+            </form>
+            <br>
+            
+    </div>
+    <p style="text-align:center">
+        <a href="http://bit.ly/2RjWFMfunction toggleResetPswd(e){
+    e.preventDefault();
+    $('#logreg-forms .form-signin').toggle() // display:block or none
+    $('#logreg-forms .form-reset').toggle() // display:block or none
+}
+
+function toggleSignUp(e){
+    e.preventDefault();
+    $('#logreg-forms .form-signin').toggle(); // display:block or none
+    $('#logreg-forms .form-signup').toggle(); // display:block or none
+}
+
+$(()=>{
+    // Login Register Form
+    $('#logreg-forms #forgot_pswd').click(toggleResetPswd);
+    $('#logreg-forms #cancel_reset').click(toggleResetPswd);
+    $('#logreg-forms #btn-signup').click(toggleSignUp);
+    $('#logreg-forms #cancel_signup').click(toggleSignUp);
+})g" target="_blank" style="color:black"></a>
+    </p>
+
+      </div>
+    {# </section><!-- End Breadcrumbs -->
+</main> #}
+
+{% endblock %}
+
+{% block javascripts %} 
+    <script src="{{asset("js/login.js")}}"></script>
+{% endblock %}

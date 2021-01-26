@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation{% endblock %}
+{% block stylesheets %}
+
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{asset('vendor/dataTable/css/dataTables.bootstrap4.min.css')}}">
+<!--===============================================================================================-->
+    
+{% endblock %}
+{% block body %}
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="{{path('E221_Accueil')}}">E221 Tech</a></li>
+          <li>Réservation</li>
+        </ol>
+        <h2>Liste des réservations</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4 w-75 mx-auto">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary text-center">Réservations</h6>
+        </div>
+        <div class="d-flex flex-row shadow-sm" id="divFilter"></div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="tableReservation"  cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Client</th>
+                            <a href="#"><th>Bien</th></a>
+                            <th>Date</th>
+                            <th>Etat</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                    {% for reservation in reservations %}
+                        <tr>
+                            <td>{{reservation.client}}</td>
+                            <td>{{reservation.bien}}</td>
+                            <td>{{reservation.createAt | date("d/m/Y")}}</td>
+                            <td>{{reservation.etat}}</td>
+                            <td class="td-number">
+                                <div class="btn-group">
+                                    <a class="btn btn-round shadow btn-warning btn-sm" href="{{path('reservation_annuler', {'id': reservation.id}) }}"> <i class="icofont-delete">Annuler</i> </a>
+                                    <a class="btn btn-round shadow btn-info btn-sm" href="{{path('reservation_valider', {'id': reservation.id}) }}"> <i class="icofont-plus">Valider</i> </a>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                    {% endfor %}
+                       
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script src="{{asset('vendor/dataTable/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('vendor/dataTable/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('js/reservation/show.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalaogue des Bien!{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{asset("css/filtreW3.css")}}">
+{% endblock %}
+{% block body %}
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="{{path('E221_Accueil')}}">E221 Tech</a></li>
+          <li>Catalogue</li>
+        </ol>
+        <h2>Catalogue des biens</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+  <!-- ======= Portfoio Section ======= -->
+    <section id="portfolio" class="portfoio">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Catalogue des biens</h2> 
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <div class="form-group w-25">
+            <select name="profile" class="custom-select" onchange="filterSelection(this.value)" id="selectZone">
+                <option selected disabled value="">Falitrer par zone</option>
+                <option value="all">Afficher tout</option>
+                {% for zone in zones %}
+                  <option value="{{zone}}">{{zone}}</option>
+                {% endfor %}                
+            </select>
+        </div>
+
+        {# <div class="row">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".filter-app">App</li>
+              <li data-filter=".filter-card">Card</li>
+              <li data-filter=".filter-web">Web</li>
+              <li data-filter=".filter-Libre">libre</li>
+            </ul>
+          </div>
+        </div> #}
+
+        <div class="row ">
+
+          {% for bien in biens %}
+
+            <div class="filterDiv col-lg-4 col-md-6 portfolio-item {{bien.zone}} filter-{{bien.zone}}">
+              <img src="{{asset("images/juma3.jpg")}}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>{{bien.description}}</h4>
+                <p>{{bien.zone}}</p>
+                <a href="{{path("reservation_reserver",{'id':bien.id})}}"  class="preview-link" title="Réserver"><i class="bx bx-plus"></i></a>
+                <a href="{{path("bien_show",{'id':bien.id})}}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+
+          {% endfor %}
+        </div>
+
+
+      </div>
+    </section><!-- End Portfoio Section -->
+    
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{asset("js/filtreW3.js")}}"></script>
+{% endblock %}

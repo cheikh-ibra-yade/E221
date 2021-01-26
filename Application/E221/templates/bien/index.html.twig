@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des bines{% endblock %}
+{% block stylesheets %}
+
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{asset('vendor/dataTable/css/dataTables.bootstrap4.min.css')}}">
+    {# <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"> #}
+<!--===============================================================================================-->
+    
+{% endblock %}
+{% block body %}
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="{{path('E221_Accueil')}}">E221 Tech</a></li>
+          <li>Biens</li>
+        </ol>
+        <h2>Liste des biens</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4 w-75 mx-auto">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary text-center">Biens</h6>
+        </div>
+        <div class="d-flex flex-row shadow-sm" id="divFilter"></div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="tableBien"  cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Titre</th>
+                            <th>Type</th>
+                            <th>Zone</th>
+                            <th>Type d'usage</th>
+                            <th>Période de location</th>
+                            <th>Montant</th>
+                            <th>Etat</th>
+                            {% if is_granted("ROLE_GESTIONNAIRE") %}
+                                <th>Demande</th> 
+                            {% endif %}
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                    {% for bien in biens %}
+                        <tr>
+                            <td>{{bien.titre}}</td>
+                            <td>{{bien.type}}</td>
+                            <td>{{bien.zone}}</td>
+                            <td>{{bien.typeUsage}}</td>
+                            <td>{{bien.periode}}</td>
+                            <td>{{bien.montant}}</td>
+                            <td>{{bien.etat}}</td>
+                            {% if is_granted("ROLE_GESTIONNAIRE") %}
+                            <td class="td-number">
+                                <div class="btn-group">
+                                    <a class="btn btn-round btn-warning btn-sm" href="{{path('bien_refuser', {'id': bien.id}) }}"> <i class="icofont-delete">bloquer</i> </a>
+                                    <a class="btn btn-round btn-info btn-sm" href="{{path('bien_accepter', {'id': bien.id}) }}"> <i class="icofont-plus">accepter</i> </a>
+                                </div>
+                            </td>
+                            {% endif %}
+                            <td class="d-flex justify-content-around">
+                                <a type="button" href="{{path('bien_show',{'id': bien.id}) }}" rel="tooltip" class="btn btn-info btn-round  btn-just-icon btn-sm" data-original-title="" title="">
+                                    <i class="  icofont-eye"></i>
+                                </a>
+                                <a type="button" href="{{path('bien_edit', {'id': bien.id}) }}" rel="tooltip" class="btn btn-success btn-round btn-just-icon btn-sm" data-original-title="" title="">
+                                    <i class="icofont-edit"></i>
+                                </a>
+                                {{ include('bien/_delete_form.html.twig') }}
+                            </td>
+                        </tr>
+                        
+                    {% endfor %}
+                       
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script src="{{asset('vendor/dataTable/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('vendor/dataTable/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('js/bien/show.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification{% endblock %}
+
+{% block stylesheets %}
+
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{asset("fonts/material-icon/css/material-design-iconic-font.min.css")}}">
+	<link rel="stylesheet" type="text/css" href="{{asset("css/bien/new.css")}}">
+<!--===============================================================================================-->
+    
+{% endblock %}
+
+{% block body %}
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="{{path('E221_Accueil')}}">E221 Tech</a></li>
+          <li>Biens</li>
+        </ol>
+        <h2>Modification de bien</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    {{ include('bien/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('bien_index') }}">back to list</a>
+
+    {{ include('bien/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{asset('js/bien/new.js')}}"></script>
+{% endblock %}

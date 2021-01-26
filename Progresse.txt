@@ -1,0 +1,46 @@
+Gérer intrerface
+
+- Front Visiteur
+	Template for all
+		-Se connecter
+			create User (x)
+			personnaliser auth
+			Admin (x)
+			affect rol Add (x)
+		- getFontionnalité by role	
+			
+		-S'inscrire
+			Proprietaire
+			Client
+
+- Connexion Admin
+	-Create Gestionnaire
+
+- registration
+	-Partenaire et Client
+
+- Connexion Partenaire
+
+
+-Gestion Bien
+	-Creation
+		-attrib
+		-Type
+		-Controller
+
+
+
+
+
+
+
+########################TO DO#######################
+# Diagram Seq Consulter categ			   #
+# Se connecter					   #
+# Template Connexion new
+# Affiche Bien Coté User
+# il ne faut pas reserver meme bien deux fois
+# Validation
+# 						   #
+#						   #
+####################################################

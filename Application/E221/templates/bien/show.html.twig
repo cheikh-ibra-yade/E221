@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail bien!{% endblock %}
+
+
+{% block body %}
+  <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="index.html">Accueil</a></li>
+          <li>Détail du bien</li>
+        </ol>
+        <h2>Information sur le bien</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="portfolio-details-container">
+
+          <div class="owl-carousel portfolio-details-carousel">
+            <img src="{{asset("images/juma1.jpg")}}" class="img-fluid" alt="">
+            <img src="{{asset("images/juma2.jpg")}}" class="img-fluid" alt="">
+            <img src="{{asset("images/juma3.jpg")}}" class="img-fluid" alt="">
+          </div>
+
+          <div class="portfolio-info">
+            <h3>Information du bien</h3>
+            <ul>
+              <li><strong>Titre</strong>: {{bien.titre}}</li>
+              <li><strong>Type</strong>: {{bien.type}}</li>
+              <li><strong>Zone</strong>: {{bien.zone}}</li>
+              <li><strong>Type d'usage</strong>: {{bien.typeUsage}}</li>
+              <li><strong>Période de la location</strong>: {{bien.periode}}</li>
+              <li><strong>Montant</strong>: {{bien.montant}} Fr</li>
+              <li><strong>Le Propriétaire</strong>: <a href="#">{{bien.user.fullName}}</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="portfolio-description">
+          <h2>Description</h2>
+          <p>
+            {{bien.description}}
+          </p>
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+{% endblock %}
+
+
+                
+                    
+    

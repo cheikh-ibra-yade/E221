@@ -1,0 +1,94 @@
+<div class="containerSave shadow">
+    <div class="signup-content">
+        <div class="signup-img">
+            <img src="{{asset("images/lampuFaal.jpg")}}" alt="">
+        </div>
+        <div class="signup-form">
+            {{form_start(form,{'attr':{'class':'register-form','id':'register-form'}})}}
+                <h2>Création de bien</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="state">Type :</label>
+                        <div class="form-select">
+                            {{ form_widget(form.type) }}
+                            <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Titre :</label>
+                        {{ form_widget(form.titre) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address">Description :</label>
+                    {{ form_widget(form.description) }}
+                </div>
+                {# <div class="form-radio">
+                    <label for="gender" class="radio-label">Type d'usage :</label>
+                    <div class="form-radio-item">
+                        <input type="radio" name="gender" id="male" checked>
+                        <label for="male">Logement</label>
+                        <span class="check"></span>
+                    </div>
+                    <div class="form-radio-item">
+                        <input type="radio" name="gender" id="female">
+                        <label for="female">Bureau</label>
+                        <span class="check"></span>
+                    </div>
+                </div> #}
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="state">Type d'usage :</label>
+                        <div class="form-select">
+                            {{ form_widget(form.typeUsage) }}
+                            
+                            <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Période :</label>
+                        <div class="form-select">
+                            {{ form_widget(form.periode) }}
+                            <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="birth_date">Montant :</label>
+                    {{ form_widget(form.montant) }}
+                </div>
+                {# <div class="form-group">
+                    <label for="pincode">Pincode :</label>
+                    {{ form_widget(form.typeUsage) }}
+                </div> #}
+                <div class="form-group">
+                    <label for="course">Zone :</label>
+                    <div class="form-select">
+                        {{ form_widget(form.zone) }}
+                        <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_widget(form.zoneField) }}
+                </div>
+                <div class="custom-file">
+                    {{ form_widget(form.imageFile) }}
+                    <label for="avatar" class="custom-file-label">Avatar </label>
+                </div>
+                <script>
+                // Add the following code if you want the name of the file appear on select
+                $(".custom-file-input").on("change", function() {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                });
+                </script>
+                <div class="form-submit">
+                    <input type="reset" value="Reset All" class="submit" name="reset" id="reset" />
+                    <button  id="submit" class="btn submit">{{ button_label|default('Enregistrer') }}</button>
+                </div>
+            {# </form> #}
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+

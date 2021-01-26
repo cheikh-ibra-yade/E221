@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BienController!{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{asset("css/filtreW3.css")}}">
+{% endblock %}
+
+{% block body %}
+
+  <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="index.html">Accueil</a></li>
+          <li>Biens</li>
+        </ol>
+        <h2>Liste des biens</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container">
+
+
+      <div class="d-flex justify-content-end">
+        
+      <div class="form-group mx-2">
+            <select name="profile" class="custom-select" onchange="filterSelection(this.value)" id="selectZone">
+                <option selected disabled value="">Falitrer par état</option>
+                <option value="all">Afficher tout</option>
+                {% for etat in etats %}
+                  <option value="{{etat}}">{{etat}}</option>
+                {% endfor %}                
+            </select>
+      </div>
+
+      <div class="form-group ">
+            <select name="profile" class="custom-select" onchange="filterSelection(this.value)" id="selectZone">
+                <option selected disabled value="">Falitrer par zone</option>
+                <option value="all">Afficher tout</option>
+                {% for zone in zones %}
+                  <option value="{{zone}}">{{zone}}</option>
+                {% endfor %}                
+            </select>
+      </div>
+
+      </div>
+        <div class="row">
+
+          {% for bien in biens %}
+            <div class="filterDiv col-lg-4  col-md-6 align-items-stretch {{bien.zone}} {{bien.etat}}" data-aos="fade-up">
+            <article class="entry">
+
+              <div class="entry-img">
+                <img src="{{asset("images/juma2.jpg")}}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="{{path("bien_detail",{'id':bien.id})}}">{{bien.description}}</a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html">{{bien.user.fullName}}</a></li>
+                  <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{bien.user.email}}</time></a></li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                <p>
+                  Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta zena prista maraeda talan mas indera.
+                </p>
+                <div class="read-more">
+                  <a href="{{path("bien_publier",{'id':bien.id})}}">Accepter</a>
+                </div>
+              </div>
+
+            </article><!-- End blog entry -->
+          </div>
+          {% endfor %}
+                
+       </div>
+    </section><!-- End Blog Section -->
+{% endblock %}
+  
+
+{% block javascripts %}
+    <script src="{{asset("js/filtreW3.js")}}"></script>
+{% endblock %}
