@@ -2,7 +2,7 @@ $('#tableReservation').DataTable({
     initComplete: function() {
         this.api().columns([0, 1, 2, 3]).every(function(d) {
             var column = this;
-            var theadname = $("#dataTable th").eq([d]).text();
+            var theadname = $("#tableReservation th").eq([d]).text();
             var select = $('<select class="custom-select"> <option value=""> Flitrer par ' + theadname + "</option></select>")
                 .appendTo($('#divFilter'))
                 .on('change', function() {

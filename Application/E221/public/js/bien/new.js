@@ -18,3 +18,12 @@ function checkValueZone(val) {
         element.removeAttribute("required")
     }
 }
+
+var avatarField = document.getElementById('bien_imageFile_file');
+avatarField.removeAttribute("required");
+(function($) {
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+})(jQuery);

@@ -39,7 +39,7 @@ Gérer intrerface
 # Se connecter					   #
 # Template Connexion new
 # Affiche Bien Coté User
-# il ne faut pas reserver meme bien deux fois
+# 
 # Validation
 # 						   #
 #						   #

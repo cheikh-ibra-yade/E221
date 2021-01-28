@@ -60,7 +60,7 @@ class BienController extends AbstractController
             }
             $em->persist($bien);
             $em->flush();
-            return $this->redirectToRoute('bien_index');
+            return $this->redirectToRoute('bien_index',['id'=>$this->getUser()->getId()]);
         }
         return $this->render('bien/new.html.twig', [
             'bien' => $bien,
@@ -108,7 +108,7 @@ class BienController extends AbstractController
             $entityManager->remove($bien);
             $entityManager->flush();
         }
-        if ($this->getUser()->getProfile()->getLibelle()=="Administrateur") {
+        if ($this->getUser()->getProfile()->getLibelle()=="Gestionnaire") {
             # code...
             return $this->redirectToRoute('bien_index');
         }else {
@@ -130,7 +130,7 @@ class BienController extends AbstractController
         $em->persist($bien);
         $em->flush();($bien);
         
-        if ($this->getUser()->getProfile()->getLibelle()=="Administrateur") {
+        if ($this->getUser()->getProfile()->getLibelle()=="Gestionnaire") {
             # code...
             return $this->redirectToRoute('bien_index');
         }else {
@@ -151,7 +151,7 @@ class BienController extends AbstractController
         $em->persist($bien);
         $em->flush();($bien);
         
-        if ($this->getUser()->getProfile()->getLibelle()=="Administrateur") {
+        if ($this->getUser()->getProfile()->getLibelle()=="Gestionnaire") {
             # code...
             return $this->redirectToRoute('bien_index');
         }else {

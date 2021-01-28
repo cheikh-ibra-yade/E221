@@ -26,6 +26,8 @@ class ReservationController extends AbstractController
         if ($client) {
             return $this->render('e221/pagnet.html.twig', [
                 'reservations' => $reservationRepository->findBy(['client' => $client]),
+                'info'=>""
+
             ]);
         }
 
@@ -34,72 +36,72 @@ class ReservationController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="reservation_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $reservation = new Reservation();
-        $form = $this->createForm(ReservationType::class, $reservation);
-        $form->handleRequest($request);
+    // /**
+    //  * @Route("/new", name="reservation_new", methods={"GET","POST"})
+    //  */
+    // public function new(Request $request): Response
+    // {
+    //     $reservation = new Reservation();
+    //     $form = $this->createForm(ReservationType::class, $reservation);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($reservation);
-            $entityManager->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $entityManager = $this->getDoctrine()->getManager();
+    //         $entityManager->persist($reservation);
+    //         $entityManager->flush();
 
-            return $this->redirectToRoute('reservation_index');
-        }
+    //         return $this->redirectToRoute('reservation_index');
+    //     }
 
-        return $this->render('reservation/new.html.twig', [
-            'reservation' => $reservation,
-            'form' => $form->createView(),
-        ]);
-    }
+    //     return $this->render('reservation/new.html.twig', [
+    //         'reservation' => $reservation,
+    //         'form' => $form->createView(),
+    //     ]);
+    // }
 
-    /**
-     * @Route("/{id}", name="reservation_show", methods={"GET"})
-     */
-    public function show(Reservation $reservation): Response
-    {
-        return $this->render('reservation/show.html.twig', [
-            'reservation' => $reservation,
-        ]);
-    }
+    // /**
+    //  * @Route("/{id}", name="reservation_show", methods={"GET"})
+    //  */
+    // public function show(Reservation $reservation): Response
+    // {
+    //     return $this->render('reservation/show.html.twig', [
+    //         'reservation' => $reservation,
+    //     ]);
+    // }
 
-    /**
-     * @Route("/{id}/edit", name="reservation_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Reservation $reservation): Response
-    {
-        $form = $this->createForm(ReservationType::class, $reservation);
-        $form->handleRequest($request);
+    // /**
+    //  * @Route("/{id}/edit", name="reservation_edit", methods={"GET","POST"})
+    //  */
+    // public function edit(Request $request, Reservation $reservation): Response
+    // {
+    //     $form = $this->createForm(ReservationType::class, $reservation);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('reservation_index');
-        }
+    //         return $this->redirectToRoute('reservation_index');
+    //     }
 
-        return $this->render('reservation/edit.html.twig', [
-            'reservation' => $reservation,
-            'form' => $form->createView(),
-        ]);
-    }
+    //     return $this->render('reservation/edit.html.twig', [
+    //         'reservation' => $reservation,
+    //         'form' => $form->createView(),
+    //     ]);
+    // }
 
-    /**
-     * @Route("/{id}", name="reservation_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Reservation $reservation): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($reservation);
-            $entityManager->flush();
-        }
+    // /**
+    //  * @Route("/{id}", name="reservation_delete", methods={"DELETE"})
+    //  */
+    // public function delete(Request $request, Reservation $reservation): Response
+    // {
+    //     if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {
+    //         $entityManager = $this->getDoctrine()->getManager();
+    //         $entityManager->remove($reservation);
+    //         $entityManager->flush();
+    //     }
 
-        return $this->redirectToRoute('reservation_index');
-    }
+    //     return $this->redirectToRoute('reservation_index');
+    // }
 
     /**
      * @Route("/{id}/reserver", name="reservation_reserver")
@@ -108,6 +110,13 @@ class ReservationController extends AbstractController
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute("app_login");
+        }
+        //Si bien déja réservé
+        if ($reservationRepository->findBy(["bien"=>$bien,"client"=>$this->getUser()])){
+            return $this->render('e221/pagnet.html.twig', [
+                'reservations'=> $reservationRepository->findBy(['client'=>$this->getUser()]),
+                'info'=>"Ce bien exit déja dans vos réservation"
+            ]);
         }
 
         $reservation = new Reservation();
@@ -120,7 +129,8 @@ class ReservationController extends AbstractController
         $entityManager->flush();
 
         return $this->render('e221/pagnet.html.twig', [
-            'reservations'=> $reservationRepository->findBy(['client'=>$this->getUser()])
+            'reservations'=> $reservationRepository->findBy(['client'=>$this->getUser()]),
+            'info'=>""
         ]);
     }
 
@@ -135,8 +145,7 @@ class ReservationController extends AbstractController
         $entityManager->persist($reservation);
         $entityManager->flush();
 
-        return $this->render('reservation/index.html.twig', [
-        ]);
+        return $this->redirectToRoute("reservation_index");
     }
 
     /**
@@ -150,7 +159,7 @@ class ReservationController extends AbstractController
         $entityManager->persist($reservation);
         $entityManager->flush();
 
-        return $this->render('reservation/index.html.twig', [
-        ]);
+        return $this->redirectToRoute("reservation_index");
+
     }
 }

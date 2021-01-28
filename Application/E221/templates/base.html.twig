@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="utf-8">
@@ -28,6 +28,8 @@
 
   <!-- Template Main CSS File -->
   <link href="{{asset("css/style.css")}}" rel="stylesheet">
+
+  
 {% block stylesheets %}
 {% endblock %}
 
@@ -40,7 +42,9 @@
 </head>
 
 <body>
-
+  {# {% set info = "" %} #}
+  
+  
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top topbar-inner-pages">
     <div class="container d-flex align-items-center">
@@ -48,7 +52,7 @@
         <ul>
           <li><i class="icofont-envelope"></i><a href="mailto:contact@example.com">contact@e221.com</a></li>
           <li><i class="icofont-phone"></i> +221 77 594 66 96</li>
-          <li><i class="icofont-clock-time icofont-flip-horizontal"></i> Mon-Fri 9am - 5pm</li>
+          <li><i class="icofont-google-map icofont-flip-horizontal"></i> Touba Mosquée X 28</li>
         </ul>
       </div>
       <div class="cta">
@@ -69,17 +73,16 @@
 
       <h1 class="logo mr-auto"><a href="#header" class="scrollto">E221 Tech</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="#header" class="logo mr-auto scrollto"><img src="{{asset("img/logo.png")}}" alt="" class="img-fluid"></a>-->
+      {# <a href="#header" class="logo mr-auto scrollto"><img src="{{asset("img/logo.jpg")}}" alt="" class="img-fluid"></a> #}
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li><a href="{{path('E221_Accueil')}}">Accueil</a></li>
+          <li><a href="{{path('E221_Accueil')}}#">Accueil</a></li>
           <li><a href="{{path('E221_Accueil')}}#about">A propos</a></li>
           <li><a href="{{path('E221_Accueil')}}#services">Services</a></li>
           <li class="active"><a href="{{path('E221_Accueil')}}#portfolio">Catalogue</a></li>
-          <li><a href="{{path('E221_Accueil')}}#team">Team</a></li>
+          <li><a href="{{path('E221_Accueil')}}#team">Partenaire</a></li>
           <li><a href="{{path('E221_Accueil')}}#pricing">Pricing</a></li>
-          <li><a href="blog.html">Blog</a></li>
 
           {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <li class="drop-down"><a href="">Action</a>
@@ -95,8 +98,14 @@
                 {% endif %}
                 {% if is_granted('ROLE_GESTIONNAIRE') %}
                   {# <li><a href="{{path('bien_faker')}}">Facker</a></li> #}
-                  <li><a href="{{path('bien_new')}}">Créer un bien</a></li>
+                  {# <li><a href="{{path('bien_new')}}">Créer un bien</a></li> #}
                   <li><a href="{{path('bien_index')}}">Lister tous les bien</a></li>
+                  <li><a href="{{path('reservation_index')}}">Lister les réservations</a></li>
+                {% endif %}
+                {% if is_granted('ROLE_ADMINISTRATEUR') %}
+                  {# <li><a href="{{path('bien_faker')}}">Facker</a></li> #}
+                  {# <li><a href="{{path('bien_new')}}">Créer un bien</a></li> #}
+                  <li><a href="{{path('app_register')}}">Créer un utilisateur</a></li>
                 {% endif %}
                 {# <li><a href="#">Drop Down 1</a></li>
                 <li class="drop-down"><a href="#">Deep Drop Down</a>
@@ -115,7 +124,7 @@
             </li>
           {% endif %}
 
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#contact">Contacts</a></li>
 
         </ul>
       </nav><!-- .nav-menu -->
@@ -124,10 +133,11 @@
   </header><!-- End Header -->
 
     <main id="main">
-
+  
         {% block body %}
 
         {% endblock %}
+
     </main>
 
   <!-- ======= Footer ======= -->
@@ -176,12 +186,12 @@
           </div>
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h4>Contact Us</h4>
+            <h4>Contacter nous</h4>
             <p>
               A108 Adam Street <br>
               New York, NY 535022<br>
               United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
+              <strong>Phone:</strong> +221 77 594 66 96<br>
               <strong>Email:</strong> info@example.com<br>
             </p>
 
@@ -231,6 +241,10 @@
   <script src="{{asset("vendor/aos/aos.js")}}"></script>
   <!-- Template Main JS File -->
   <script src="{{asset("js/main.js")}}"></script>
+
+  {# {# <!-- Modal JS File --> #}
+ 
+  
   
 {% block javascripts %}
 {% endblock %}

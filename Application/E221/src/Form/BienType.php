@@ -41,7 +41,8 @@ class BienType extends AbstractType
             ->add('imageFile',VichImageType::class,[
                 "attr"=>[
                     "placeholder"=>"Avatar",
-                    "class"=>"custom-file-input"
+                    "class"=>"custom-file-input",
+                    'required' => false,
                 ]])
 
             ->add('zone',ChoiceType::class,[

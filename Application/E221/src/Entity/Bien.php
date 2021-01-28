@@ -7,6 +7,7 @@ use App\Repository\BienRepository;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
@@ -25,27 +26,41 @@ class Bien
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="La description du bien est obligatoire")
+     * 
      */
     private $description;
 
     
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice(choices=Bien::TYPE, message="Le Type choisit n'est pas valide.")
      */
     private $type;
 
     /**
      * @ORM\Column(type="float")
+     * 
+     * @Assert\Type(
+     *     type="numeric",
+     *     message=" {{ value }} N'est pas de type{{ type }}."
+     * )
+     * 
+     * @Assert\Positive(message="Veulliez saisire une valeur positif.")
+     * 
+     *
      */
     private $montant;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice(choices=Bien::PERIODE, message="La période choisit n'est pas valide.")
      */
     private $periode;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Choice(choices=Bien::TYPE_USAGE, message="Le type d'usage choisit n'est pas valide.")
      */
     private $typeUsage;
 
@@ -62,6 +77,7 @@ class Bien
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
      */
     private $avatar;
 
@@ -84,6 +100,7 @@ class Bien
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="La description du bien est obligatoire")
      */
     private $titre;
 
