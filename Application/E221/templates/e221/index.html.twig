@@ -289,7 +289,7 @@ sur notre blog.</p>
           <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
 
-        <div class="row">
+        {# <div class="row">
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
               <li data-filter="*" class="filter-active">All</li>
@@ -298,13 +298,15 @@ sur notre blog.</p>
               <li data-filter=".filter-web">Web</li>
             </ul>
           </div>
-        </div>
+        </div> #}
 
         <div class="row portfolio-container">
           {% for bien in biens %}
             
             <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-              <img src="{{asset("images/Al_Muntaxaa.png")}}" class="img-fluid" alt="">
+            <img src="{{asset("images/avatars/")}}{{bien.avatar}}" class="img-fluid" alt="">
+            {# <img src="{{asset("images/avatars/")}}{{bien.avatar}}" class="img-fluid" alt="" style="width:1110px;height:832.5px;"> #}
+              {# <img src="{{asset("images/Al_Muntaxaa.png")}}" class="img-fluid" alt=""> #}
               <div class="portfolio-info">
                 <h4>{{bien.titre}}</h4>
                 <p>{{bien.zone}}</p>

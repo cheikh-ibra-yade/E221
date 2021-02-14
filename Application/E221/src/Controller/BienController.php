@@ -124,11 +124,13 @@ class BienController extends AbstractController
     public function accepte(Bien $bien): Response
     {
 
-        $mntTotal = $bien->getMontant() * 1.05;
-        $bien->setEtat(Bien::ETAT["Libre"])->setMontant($mntTotal);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($bien);
-        $em->flush();($bien);
+        if ($bien->getEtat()=="Encours") {
+            $mntTotal = $bien->getMontant() * 1.05;
+            $bien->setEtat(Bien::ETAT["Libre"])->setMontant($mntTotal);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($bien);
+            $em->flush();($bien);
+        }
         
         if ($this->getUser()->getProfile()->getLibelle()=="Gestionnaire") {
             # code...

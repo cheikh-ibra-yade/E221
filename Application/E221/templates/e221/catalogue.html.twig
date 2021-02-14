@@ -54,9 +54,11 @@
           {% for bien in biens %}
 
             <div class="filterDiv col-lg-4 col-md-6 portfolio-item {{bien.zone}} filter-{{bien.zone}}">
-              <img src="{{asset("images/juma3.jpg")}}" class="img-fluid" alt="">
+              <img src="{{asset("images/avatars/")}}{{bien.avatar}}" class="img-fluid" alt="">
+
+              {# <img src="{{asset("images/juma3.jpg")}}" class="img-fluid" alt=""> #}
               <div class="portfolio-info">
-                <h4>{{bien.description}}</h4>
+                <h4>{{bien.titre}}</h4>
                 <p>{{bien.zone}}</p>
                 <a href="{{path("reservation_reserver",{'id':bien.id})}}"  class="preview-link" title="Réserver"><i class="bx bx-plus"></i></a>
                 <a href="{{path("bien_show",{'id':bien.id})}}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
